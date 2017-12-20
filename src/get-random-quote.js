@@ -1,4 +1,5 @@
 const request = require('request-promise');
+const escapeJson = require('escape-json-node');
 
 function getRandomQuote() {
     var options = {
@@ -9,16 +10,18 @@ function getRandomQuote() {
             format: 'json',
             param: 'ms',
             lang: 'en'
-        },
-        json: true
+        }
     };
 
     return request(options)
-        .then(function (quote) {
-            return {
-                author: quote.quoteAuthor,
-                text: quote.quoteText
-            }
+        .then(function (quoteJson) {
+            // forismatic sometimes returns invalid JSON
+            let inputQuote = JSON.parse(escapeJson(quoteJson));
+            let quote = {
+                author: inputQuote.quoteAuthor,
+                text: inputQuote.quoteText
+            };
+            return quote;
         });
 }
 

@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/kdelmonte/get-random-quote#readme",
   "dependencies": {
+    "escape-json-node": "^2.0.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2"
   },
