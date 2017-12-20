@@ -18,8 +18,8 @@ function getRandomQuote() {
             // forismatic sometimes returns invalid JSON
             let inputQuote = JSON.parse(escapeJson(quoteJson));
             let quote = {
-                author: inputQuote.quoteAuthor,
-                text: inputQuote.quoteText
+                author: inputQuote.quoteAuthor ? inputQuote.quoteAuthor.trim() : null,
+                text: inputQuote.quoteText.trim()
             };
             return quote;
         });
